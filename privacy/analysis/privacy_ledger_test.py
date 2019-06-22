@@ -18,6 +18,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from distutils.version import LooseVersion
+
 import tensorflow as tf
 
 from privacy.analysis import privacy_ledger
@@ -25,7 +27,8 @@ from privacy.dp_query import gaussian_query
 from privacy.dp_query import nested_query
 from privacy.dp_query import test_utils
 
-tf.enable_eager_execution()
+if LooseVersion(tf.__version__) < LooseVersion('2.0.0'):
+  tf.enable_eager_execution()
 
 
 class PrivacyLedgerTest(tf.test.TestCase):
